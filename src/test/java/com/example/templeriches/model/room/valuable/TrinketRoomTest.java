@@ -7,9 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TrinketRoomTest {
     @Test
-    public void getRoomValue_ReturnsFive() {
+    public void getRoomValue_ReturnsTrinketValue() {
         var room = new TrinketRoom();
-        assertThat(room.getRoomValue()).isEqualTo(5);
+        assertThat(room.getRoomValue()).isEqualTo(new Trinket().getValue());
     }
 
     @Test

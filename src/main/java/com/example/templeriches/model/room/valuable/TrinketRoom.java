@@ -10,7 +10,7 @@ public class TrinketRoom implements ValuableRoom {
 
     @Override
     public int getRoomValue() {
-        return roomHasTrinket ? 5 : 0;
+        return roomHasTrinket ? Trinket.getTrinketValue() : 0;
     }
 
     @Override
