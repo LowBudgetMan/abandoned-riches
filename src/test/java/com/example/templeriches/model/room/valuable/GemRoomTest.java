@@ -32,7 +32,7 @@ class GemRoomTest {
     public void splitValue_WithMorePlayersThanGems_ReturnsEmpty() {
         var room = new GemRoom(7);
         var actual = room.splitValue(8);
-        assertThat(actual.isEmpty()).isTrue();
+        assertThat(actual).isEmpty();
     }
 
     @Test

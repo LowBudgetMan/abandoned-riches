@@ -6,15 +6,20 @@ import com.example.templeriches.model.valuable.Valuable;
 import java.util.Optional;
 
 public class TrinketRoom implements ValuableRoom {
-    private Trinket roomTrinket;
+    private boolean roomHasTrinket = true;
 
     @Override
     public int getRoomValue() {
-        throw new UnsupportedOperationException();
+        return roomHasTrinket ? 5 : 0;
     }
 
     @Override
     public Optional<Valuable> splitValue(int numberOfPlayersRunning) {
-        throw new UnsupportedOperationException();
+        if(numberOfPlayersRunning == 1) {
+            roomHasTrinket = false;
+            return Optional.of(new Trinket());
+        } else {
+            return Optional.empty();
+        }
     }
 }
