@@ -1,13 +1,36 @@
 package com.example.templeriches.model;
 
+import com.example.templeriches.model.exception.NoMoreRoomsException;
 import com.example.templeriches.model.room.Room;
-import com.example.templeriches.model.room.hazard.HazardRoom;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 public class Temple {
-    private List<Room> rooms;
+    private final List<Room> rooms;
     private int currentRoom;
-    private Map<HazardRoom, Integer> hazardRoomsRevealedCount;
+
+    public Temple(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public int getNumberOfRooms() {
+        return rooms.size();
+    }
+
+    public Optional<Room> getCurrentRoom() {
+        try {
+            return Optional.of(rooms.get(currentRoom - 1));
+        } catch (IndexOutOfBoundsException e) {
+            return Optional.empty();
+        }
+    }
+
+    public void advanceToNextRoom() throws NoMoreRoomsException {
+        if(currentRoom >= rooms.size()) {
+            throw new NoMoreRoomsException();
+        } else {
+            currentRoom = currentRoom + 1;
+        }
+    }
 }
