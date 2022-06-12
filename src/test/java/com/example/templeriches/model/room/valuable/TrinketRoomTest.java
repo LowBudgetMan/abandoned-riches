@@ -1,5 +1,6 @@
 package com.example.templeriches.model.room.valuable;
 
+import com.example.templeriches.model.room.RoomType;
 import com.example.templeriches.model.valuable.Trinket;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,12 @@ class TrinketRoomTest {
     public void getRoomValue_ReturnsTrinketValue() {
         var room = new TrinketRoom();
         assertThat(room.getRoomValue()).isEqualTo(new Trinket().getValue());
+    }
+
+    @Test
+    public void getRoomType_ReturnsValuable() {
+        var room = new TrinketRoom();
+        assertThat(room.getRoomType()).isEqualTo(RoomType.VALUABLE);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.example.templeriches.model.room.valuable;
 
+import com.example.templeriches.model.room.RoomType;
 import com.example.templeriches.model.valuable.Gem;
 import com.example.templeriches.model.valuable.Valuable;
 import lombok.EqualsAndHashCode;
@@ -28,5 +29,10 @@ public class GemRoom implements ValuableRoom {
         } else {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public RoomType getRoomType() {
+        return RoomType.VALUABLE;
     }
 }

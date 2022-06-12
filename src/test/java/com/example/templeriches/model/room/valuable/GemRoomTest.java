@@ -1,5 +1,6 @@
 package com.example.templeriches.model.room.valuable;
 
+import com.example.templeriches.model.room.RoomType;
 import com.example.templeriches.model.valuable.Gem;
 import com.example.templeriches.model.valuable.Valuable;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,12 @@ class GemRoomTest {
     public void getRoomValue_ReturnsTotalValueLeftInRoom() {
         var room = new GemRoom(7);
         assertThat(room.getRoomValue()).isEqualTo(7);
+    }
+
+    @Test
+    public void getRoomType_ReturnsValuable() {
+        var room = new GemRoom(2);
+        assertThat(room.getRoomType()).isEqualTo(RoomType.VALUABLE);
     }
 
     @Test
