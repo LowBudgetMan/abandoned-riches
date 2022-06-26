@@ -33,4 +33,10 @@ public class Temple {
             currentRoom = currentRoom + 1;
         }
     }
+
+    //TODO: Add method to have people leave the temple
+
+    //TODO: Add method to show already revealed rooms
+
+    //TODO: Add method to see how many Trinkets are left over
 }
