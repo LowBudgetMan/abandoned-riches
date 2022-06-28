@@ -34,7 +34,5 @@ public class TrinketRoom implements ValuableRoom {
     }
 
     @Override
-    public void openRoom(List<Player> players) {
-        throw new UnsupportedOperationException();
-    }
+    public void openRoom(List<Player> players) {}
 }

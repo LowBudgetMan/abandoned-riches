@@ -12,6 +12,7 @@ public class HazardTracker {
     }
 
     public int getCountForHazard(HazardType hazard) {
+        //TODO: Should this throw an exception when the count for a hazard hits two?
         Optional<Integer> optionalInteger = Optional.ofNullable(hazardCountMap.get(hazard));
         return optionalInteger.orElse(0);
     }
