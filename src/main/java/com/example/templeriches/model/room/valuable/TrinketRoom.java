@@ -30,4 +30,9 @@ public class TrinketRoom implements ValuableRoom {
     public RoomType getRoomType() {
         return RoomType.VALUABLE;
     }
+
+    @Override
+    public void openRoom() {
+        throw new UnsupportedOperationException();
+    }
 }

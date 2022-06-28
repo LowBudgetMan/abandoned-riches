@@ -23,4 +23,9 @@ public class HazardRoom implements Room {
     public RoomType getRoomType() {
         return RoomType.HAZARD;
     }
+
+    @Override
+    public void openRoom() {
+        hazardTracker.incrementCount(hazardType);
+    }
 }
