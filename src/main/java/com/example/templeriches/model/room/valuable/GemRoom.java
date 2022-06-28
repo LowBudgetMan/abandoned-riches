@@ -43,4 +43,9 @@ public class GemRoom implements ValuableRoom {
         var gems = splitValue(players.size()).orElse(new Gem(0));
         players.forEach(player -> player.addValuableFromTemple(gems));
     }
+
+    @Override
+    public void exitRoom() {
+        throw new UnsupportedOperationException();
+    }
 }

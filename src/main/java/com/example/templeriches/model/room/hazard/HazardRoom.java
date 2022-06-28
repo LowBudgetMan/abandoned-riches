@@ -31,4 +31,7 @@ public class HazardRoom implements Room {
     public void openRoom(List<Player> players) {
         hazardTracker.incrementCount(hazardType);
     }
+
+    @Override
+    public void exitRoom() {}
 }
