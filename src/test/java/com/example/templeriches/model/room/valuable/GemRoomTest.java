@@ -1,9 +1,12 @@
 package com.example.templeriches.model.room.valuable;
 
+import com.example.templeriches.model.Player;
 import com.example.templeriches.model.room.RoomType;
 import com.example.templeriches.model.valuable.Gem;
 import com.example.templeriches.model.valuable.Valuable;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,5 +50,19 @@ class GemRoomTest {
         var room = new GemRoom(7);
        room.splitValue(8);
         assertThat(room.getRoomValue()).isEqualTo(7);
+    }
+
+    @Test
+    public void openRoom_AddsSplitValueGemsToPlayers() {
+        var player1 = Player.from("player1");
+        var player2 = Player.from("player2");
+        var playerList = List.of(player1, player2);
+        var room = new GemRoom(9);
+
+        room.openRoom(playerList);
+
+        assertThat(room.getRoomValue()).isEqualTo(1);
+        assertThat(player1.getValueOfTempleHaul()).isEqualTo(4);
+        assertThat(player2.getValueOfTempleHaul()).isEqualTo(4);
     }
 }

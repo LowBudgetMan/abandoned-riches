@@ -1,10 +1,12 @@
 package com.example.templeriches.model.room.valuable;
 
+import com.example.templeriches.model.Player;
 import com.example.templeriches.model.room.RoomType;
 import com.example.templeriches.model.valuable.Trinket;
 import com.example.templeriches.model.valuable.Valuable;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
 import java.util.Optional;
 
 @EqualsAndHashCode
@@ -32,7 +34,7 @@ public class TrinketRoom implements ValuableRoom {
     }
 
     @Override
-    public void openRoom() {
+    public void openRoom(List<Player> players) {
         throw new UnsupportedOperationException();
     }
 }

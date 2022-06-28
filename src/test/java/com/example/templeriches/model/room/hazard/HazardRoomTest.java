@@ -2,6 +2,8 @@ package com.example.templeriches.model.room.hazard;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static com.example.templeriches.model.room.RoomType.HAZARD;
 import static com.example.templeriches.model.room.hazard.HazardType.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +26,7 @@ class HazardRoomTest {
         var tracker = new HazardTracker();
         var room = new HazardRoom(tracker, SNAKE);
 
-        room.openRoom();
+        room.openRoom(List.of());
 
         assertThat(tracker.getCountForHazard(SNAKE)).isEqualTo(1);
     }
