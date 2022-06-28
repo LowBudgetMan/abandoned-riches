@@ -53,13 +53,27 @@ class GemRoomTest {
     }
 
     @Test
-    public void openRoom_AddsSplitValueGemsToPlayers() {
+    public void openRoom_SplitsGemsBetweenPlayers() {
         var player1 = Player.from("player1");
         var player2 = Player.from("player2");
         var playerList = List.of(player1, player2);
         var room = new GemRoom(9);
 
         room.openRoom(playerList);
+
+        assertThat(room.getRoomValue()).isEqualTo(1);
+        assertThat(player1.getValueOfTempleHaul()).isEqualTo(4);
+        assertThat(player2.getValueOfTempleHaul()).isEqualTo(4);
+    }
+
+    @Test
+    public void exitRoom_SplitsGemsBetweenPlayersLeaving() {
+        var player1 = Player.from("player1");
+        var player2 = Player.from("player2");
+        var playerList = List.of(player1, player2);
+        var room = new GemRoom(9);
+
+        room.exitRoom(playerList);
 
         assertThat(room.getRoomValue()).isEqualTo(1);
         assertThat(player1.getValueOfTempleHaul()).isEqualTo(4);
