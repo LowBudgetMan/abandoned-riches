@@ -1,8 +1,11 @@
 package com.example.templeriches.model.room.valuable;
 
+import com.example.templeriches.model.Player;
 import com.example.templeriches.model.room.RoomType;
 import com.example.templeriches.model.valuable.Trinket;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,5 +48,29 @@ class TrinketRoomTest {
         var room = new TrinketRoom();
         room.splitValue(2);
         assertThat(room.getRoomValue()).isEqualTo(5);
+    }
+
+    @Test
+    public void exitRoom_WillSplitTrinketWithPlayersLeaving() {
+        var player1 = Player.from("player1");
+        var room = new TrinketRoom();
+
+        room.exitRoom(List.of(player1));
+
+        assertThat(player1.getValueOfTempleHaul()).isEqualTo(5);
+        assertThat(room.getRoomValue()).isEqualTo(0);
+    }
+
+    @Test
+    public void exitRoom_WithMoreThanOnePlayerLeaving_WillGiveNeitherPlayerTrinket() {
+        var player1 = Player.from("player1");
+        var player2 = Player.from("player1");
+        var room = new TrinketRoom();
+
+        room.exitRoom(List.of(player1, player2));
+
+        assertThat(player1.getValueOfTempleHaul()).isEqualTo(0);
+        assertThat(player2.getValueOfTempleHaul()).isEqualTo(0);
+        assertThat(room.getRoomValue()).isEqualTo(Trinket.getTrinketValue());
     }
 }

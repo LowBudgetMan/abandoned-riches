@@ -45,7 +45,7 @@ public class GemRoom implements ValuableRoom {
     }
 
     @Override
-    public void exitRoom() {
+    public void exitRoom(List<Player> players) {
         throw new UnsupportedOperationException();
     }
 }

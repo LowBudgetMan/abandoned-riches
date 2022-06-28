@@ -37,7 +37,10 @@ public class TrinketRoom implements ValuableRoom {
     public void openRoom(List<Player> players) {}
 
     @Override
-    public void exitRoom() {
-        throw new UnsupportedOperationException();
+    public void exitRoom(List<Player> players) {
+        var optionalTrinket = splitValue(players.size());
+        if(optionalTrinket.isPresent() && players.size() == 1) {
+            players.get(0).addValuableFromTemple(optionalTrinket.get());
+        }
     }
 }

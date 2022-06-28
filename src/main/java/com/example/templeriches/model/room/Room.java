@@ -7,5 +7,5 @@ import java.util.List;
 public interface Room {
     RoomType getRoomType();
     void openRoom(List<Player> players);
-    void exitRoom();
+    void exitRoom(List<Player> players);
 }

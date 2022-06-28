@@ -33,5 +33,5 @@ public class HazardRoom implements Room {
     }
 
     @Override
-    public void exitRoom() {}
+    public void exitRoom(List<Player> players) {}
 }
