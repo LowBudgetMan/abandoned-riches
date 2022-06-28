@@ -1,13 +1,14 @@
 package com.example.templeriches.model;
 
 import com.example.templeriches.model.exception.NoMoreRoomsException;
-import com.example.templeriches.model.room.hazard.RocksRoom;
-import com.example.templeriches.model.room.hazard.ZombieRoom;
+import com.example.templeriches.model.room.hazard.HazardRoom;
 import com.example.templeriches.model.room.valuable.GemRoom;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.example.templeriches.model.room.hazard.HazardType.ROCKS;
+import static com.example.templeriches.model.room.hazard.HazardType.ZOMBIE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,8 +17,8 @@ class TempleTest {
     @Test
     public void getNumberOfRooms_ReturnsNumberOfRoomsProvided() {
         var empty = new Temple(List.of());
-        var one = new Temple(List.of(new ZombieRoom()));
-        var many = new Temple(List.of(new GemRoom(2), new RocksRoom()));
+        var one = new Temple(List.of(new HazardRoom(null, ZOMBIE)));
+        var many = new Temple(List.of(new GemRoom(2), new HazardRoom(null, ROCKS)));
 
         assertThat(empty.getNumberOfRooms()).isEqualTo(0);
         assertThat(one.getNumberOfRooms()).isEqualTo(1);
@@ -26,17 +27,17 @@ class TempleTest {
 
     @Test
     public void getCurrentRoom_WhenRoomsHaveNotAdvanced_ReturnsNull() {
-        var temple = new Temple(List.of(new ZombieRoom()));
+        var temple = new Temple(List.of(new HazardRoom(null ,ZOMBIE)));
         var actual = temple.getCurrentRoom();
         assertThat(actual).isEmpty();
     }
 
     @Test
     public void getCurrentRoom_WhenRoomsHaveAdvancedOnce_ReturnsFirstRoom() throws NoMoreRoomsException {
-        var temple = new Temple(List.of(new ZombieRoom()));
+        var temple = new Temple(List.of(new HazardRoom(null, ZOMBIE)));
         temple.advanceToNextRoom();
         var actual = temple.getCurrentRoom().orElseThrow();
-        assertThat(actual).isEqualTo(new ZombieRoom());
+        assertThat(actual).isEqualTo(new HazardRoom(null, ZOMBIE));
     }
 
     @Test
