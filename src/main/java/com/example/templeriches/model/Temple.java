@@ -26,12 +26,13 @@ public class Temple {
         }
     }
 
-    public void advanceToNextRoom() throws NoMoreRoomsException {
-        if(currentRoom >= rooms.size()) {
-            throw new NoMoreRoomsException();
-        } else {
-            currentRoom = currentRoom + 1;
-        }
+    public void advanceToNextRoom(List<Player> players) throws NoMoreRoomsException {
+            try {
+                rooms.get(currentRoom).openRoom(players);
+                currentRoom = currentRoom + 1;
+            } catch (IndexOutOfBoundsException e) {
+                throw new NoMoreRoomsException();
+            }
     }
 
     //TODO: Add method to have people leave the temple
