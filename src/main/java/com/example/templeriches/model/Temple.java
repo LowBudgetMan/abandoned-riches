@@ -8,10 +8,12 @@ import java.util.Optional;
 
 public class Temple {
     private final List<Room> rooms;
+    private final List<Player> playersInTemple;
     private int currentRoom;
 
-    public Temple(List<Room> rooms) {
+    public Temple(List<Room> rooms, List<Player> playersInTemple) {
         this.rooms = rooms;
+        this.playersInTemple = playersInTemple;
     }
 
     public int getNumberOfRooms() {
@@ -26,16 +28,18 @@ public class Temple {
         }
     }
 
-    public void advanceToNextRoom(List<Player> players) throws NoMoreRoomsException {
+    public void advanceToNextRoom() throws NoMoreRoomsException {
             try {
-                rooms.get(currentRoom).openRoom(players);
+                rooms.get(currentRoom).openRoom(playersInTemple);
                 currentRoom = currentRoom + 1;
             } catch (IndexOutOfBoundsException e) {
                 throw new NoMoreRoomsException();
             }
     }
 
-    //TODO: Add method to have people leave the temple
+    public void retreatPlayersFromTemple(List<Player> players) {
+
+    }
 
     //TODO: Add method to show already revealed rooms
 
