@@ -3,17 +3,18 @@ package com.example.templeriches.model;
 import com.example.templeriches.model.exception.NoMoreRoomsException;
 import com.example.templeriches.model.room.Room;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class Temple {
     private final List<Room> rooms;
-    private final List<Player> playersInTemple;
+    private final ArrayList<Player> playersInTemple;
     private int currentRoom;
 
     public Temple(List<Room> rooms, List<Player> playersInTemple) {
         this.rooms = rooms;
-        this.playersInTemple = playersInTemple;
+        this.playersInTemple = new ArrayList<>(playersInTemple);
     }
 
     public int getNumberOfRooms() {
@@ -29,16 +30,18 @@ public class Temple {
     }
 
     public void advanceToNextRoom() throws NoMoreRoomsException {
-            try {
-                rooms.get(currentRoom).openRoom(playersInTemple);
-                currentRoom = currentRoom + 1;
-            } catch (IndexOutOfBoundsException e) {
-                throw new NoMoreRoomsException();
-            }
+        try {
+            rooms.get(currentRoom).openRoom(playersInTemple);
+            currentRoom = currentRoom + 1;
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoMoreRoomsException();
+        }
     }
 
     public void retreatPlayersFromTemple(List<Player> players) {
-
+        rooms.subList(0, currentRoom).forEach(room -> room.exitRoom(players));
+        //TODO: Should this method also move the player's money from templeHaul to stored? Is that a method on Player or somehow protected as a part of the temple?
+        players.forEach(playersInTemple::remove);
     }
 
     //TODO: Add method to show already revealed rooms

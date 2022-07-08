@@ -9,17 +9,15 @@ public class Player {
     private final String name;
     private final List<Valuable> valuablesInTemple;
     private final List<Valuable> valuablesStored;
-    private boolean inTemple;
 
-    private Player(String name, ArrayList<Valuable> valuablesInTemple, ArrayList<Valuable> valuablesStored, boolean inTemple) {
+    private Player(String name, ArrayList<Valuable> valuablesInTemple, ArrayList<Valuable> valuablesStored) {
         this.name = name;
         this.valuablesInTemple = valuablesInTemple;
         this.valuablesStored = valuablesStored;
-        this.inTemple = inTemple;
     }
 
     public static Player from(String name) {
-        return new Player(name, new ArrayList<>(), new ArrayList<>(), false);
+        return new Player(name, new ArrayList<>(), new ArrayList<>());
     }
 
     public String getName() {

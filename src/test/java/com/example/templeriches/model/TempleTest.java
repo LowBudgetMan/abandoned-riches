@@ -74,4 +74,39 @@ class TempleTest {
         temple.advanceToNextRoom();
         assertThat(player1.getValueOfTempleHaul()).isEqualTo(2);
     }
+
+    @Test
+    public void retreatPlayersFromTemple_RemovesPlayersFromPlayersInTemple() throws NoMoreRoomsException {
+        var player1 = Player.from("player1");
+        var player2 = Player.from("player2");
+        var player3 = Player.from("player3");
+        var player4 = Player.from("player4");
+        var temple = new Temple(List.of(new GemRoom(2)), List.of(player1, player2, player3, player4));
+
+        temple.retreatPlayersFromTemple(List.of(player2, player3));
+        temple.advanceToNextRoom();
+
+        assertThat(player1.getValueOfTempleHaul()).isEqualTo(1);
+        assertThat(player2.getValueOfTempleHaul()).isEqualTo(0);
+        assertThat(player3.getValueOfTempleHaul()).isEqualTo(0);
+        assertThat(player4.getValueOfTempleHaul()).isEqualTo(1);
+    }
+
+    @Test
+    public void retreatPlayersFromTemple_AddsTreasureOnGroundToFleeingPlayers() throws NoMoreRoomsException {
+        var player1 = Player.from("player1");
+        var player2 = Player.from("player2");
+        var player3 = Player.from("player3");
+        var player4 = Player.from("player4");
+        var temple = new Temple(List.of(new GemRoom(2), new GemRoom(2)), List.of(player1, player2, player3, player4));
+
+        temple.advanceToNextRoom();
+        temple.advanceToNextRoom();
+        temple.retreatPlayersFromTemple(List.of(player2, player3));
+
+        assertThat(player1.getValueOfTempleHaul()).isEqualTo(0);
+        assertThat(player2.getValueOfTempleHaul()).isEqualTo(2);
+        assertThat(player3.getValueOfTempleHaul()).isEqualTo(2);
+        assertThat(player4.getValueOfTempleHaul()).isEqualTo(0);
+    }
 }
