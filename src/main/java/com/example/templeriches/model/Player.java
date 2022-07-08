@@ -28,7 +28,20 @@ public class Player {
         valuablesInTemple.add(valuable);
     }
 
+    public void moveTempleHaulToStorage() {
+        valuablesStored.addAll(valuablesInTemple);
+        valuablesInTemple.clear();
+    }
+
+    public int getValueOfStorage() {
+        return sumValuablesList(valuablesStored);
+    }
+
     public int getValueOfTempleHaul() {
-        return valuablesInTemple.stream().reduce(0, (subtotal, valuable) -> subtotal + valuable.getValue(), Integer::sum);
+        return sumValuablesList(valuablesInTemple);
+    }
+
+    private int sumValuablesList(List<Valuable> valuables) {
+        return valuables.stream().reduce(0, (subtotal, valuable) -> subtotal + valuable.getValue(), Integer::sum);
     }
 }
