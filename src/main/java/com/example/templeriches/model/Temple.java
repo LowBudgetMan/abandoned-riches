@@ -40,7 +40,7 @@ public class Temple {
 
     public void retreatPlayersFromTemple(List<Player> players) {
         rooms.subList(0, currentRoom).forEach(room -> room.exitRoom(players));
-        //TODO: Should this method also move the player's money from templeHaul to stored? Is that a method on Player or somehow protected as a part of the temple?
+        players.forEach(Player::moveTempleHaulToStorage);
         players.forEach(playersInTemple::remove);
     }
 

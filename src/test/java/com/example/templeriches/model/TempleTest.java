@@ -93,20 +93,28 @@ class TempleTest {
     }
 
     @Test
-    public void retreatPlayersFromTemple_AddsTreasureOnGroundToFleeingPlayers() throws NoMoreRoomsException {
+    public void retreatPlayersFromTemple_MovesValuablesFromTempleToStorage() throws NoMoreRoomsException {
         var player1 = Player.from("player1");
         var player2 = Player.from("player2");
-        var player3 = Player.from("player3");
-        var player4 = Player.from("player4");
-        var temple = new Temple(List.of(new GemRoom(2), new GemRoom(2)), List.of(player1, player2, player3, player4));
+        var temple = new Temple(List.of(new GemRoom(4), new GemRoom(2)), List.of(player1, player2));
 
         temple.advanceToNextRoom();
         temple.advanceToNextRoom();
-        temple.retreatPlayersFromTemple(List.of(player2, player3));
+        temple.retreatPlayersFromTemple(List.of(player1));
 
-        assertThat(player1.getValueOfTempleHaul()).isEqualTo(0);
-        assertThat(player2.getValueOfTempleHaul()).isEqualTo(2);
-        assertThat(player3.getValueOfTempleHaul()).isEqualTo(2);
-        assertThat(player4.getValueOfTempleHaul()).isEqualTo(0);
+        assertThat(player1.getValueOfStorage()).isEqualTo(3);
+        assertThat(player2.getValueOfStorage()).isEqualTo(0);
+    }
+
+    @Test
+    public void retreatPlayersFromTemple_PicksUpGroundValuablesBeforeStorage() throws NoMoreRoomsException {
+        var player1 = Player.from("player1");
+        var player2 = Player.from("player2");
+        var temple = new Temple(List.of(new GemRoom(1)), List.of(player1, player2));
+
+        temple.advanceToNextRoom();
+        temple.retreatPlayersFromTemple(List.of(player1));
+
+        assertThat(player1.getValueOfStorage()).isEqualTo(1);
     }
 }
