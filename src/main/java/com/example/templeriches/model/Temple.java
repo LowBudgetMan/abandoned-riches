@@ -40,8 +40,10 @@ public class Temple {
 
     public void retreatPlayersFromTemple(List<Player> players) {
         rooms.subList(0, currentRoom).forEach(room -> room.exitRoom(players));
-        players.forEach(Player::moveTempleHaulToStorage);
-        players.forEach(playersInTemple::remove);
+        for(var player : players) {
+            player.moveTempleHaulToStorage();
+            playersInTemple.remove(player);
+        }
     }
 
     //TODO: Add method to show already revealed rooms
