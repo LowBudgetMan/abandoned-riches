@@ -8,4 +8,8 @@ public class TotalPartyKillException extends Exception{
     public TotalPartyKillException(HazardType hazard) {
         this.hazard = hazard;
     }
+
+    public HazardType getHazardType() {
+        return hazard;
+    }
 }
