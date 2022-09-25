@@ -1,6 +1,7 @@
 package com.example.templeriches.model;
 
 import com.example.templeriches.model.exception.NoMoreRoomsException;
+import com.example.templeriches.model.exception.TotalPartyKillException;
 import com.example.templeriches.model.room.Room;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class Temple {
         }
     }
 
-    public void advanceToNextRoom() throws NoMoreRoomsException {
+    public void advanceToNextRoom() throws NoMoreRoomsException, TotalPartyKillException {
         try {
             rooms.get(currentRoom).openRoom(playersInTemple);
             currentRoom = currentRoom + 1;

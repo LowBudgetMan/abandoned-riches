@@ -1,6 +1,7 @@
 package com.example.templeriches.model.room.hazard;
 
 import com.example.templeriches.model.Player;
+import com.example.templeriches.model.exception.TotalPartyKillException;
 import com.example.templeriches.model.room.Room;
 import com.example.templeriches.model.room.RoomType;
 import lombok.EqualsAndHashCode;
@@ -28,7 +29,7 @@ public class HazardRoom implements Room {
     }
 
     @Override
-    public void openRoom(List<Player> players) {
+    public void openRoom(List<Player> players) throws TotalPartyKillException {
         hazardTracker.incrementCount(hazardType);
     }
 

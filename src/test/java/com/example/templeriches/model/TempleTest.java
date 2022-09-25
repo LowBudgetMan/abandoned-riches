@@ -1,6 +1,7 @@
 package com.example.templeriches.model;
 
 import com.example.templeriches.model.exception.NoMoreRoomsException;
+import com.example.templeriches.model.exception.TotalPartyKillException;
 import com.example.templeriches.model.room.hazard.HazardRoom;
 import com.example.templeriches.model.room.hazard.HazardTracker;
 import com.example.templeriches.model.room.valuable.GemRoom;
@@ -34,7 +35,7 @@ class TempleTest {
     }
 
     @Test
-    public void getCurrentRoom_WhenRoomsHaveAdvancedOnce_ReturnsFirstRoom() throws NoMoreRoomsException {
+    public void getCurrentRoom_WhenRoomsHaveAdvancedOnce_ReturnsFirstRoom() throws NoMoreRoomsException, TotalPartyKillException {
         var player1 = Player.from("player1");
         var hazardTracker = new HazardTracker();
         var temple = new Temple(List.of(new HazardRoom(hazardTracker, ZOMBIE)), List.of(player1));
@@ -44,7 +45,7 @@ class TempleTest {
     }
 
     @Test
-    public void getCurrentRoom_WhenRoomHasAdvancedNTimes_ReturnsNthRoom() throws NoMoreRoomsException {
+    public void getCurrentRoom_WhenRoomHasAdvancedNTimes_ReturnsNthRoom() throws NoMoreRoomsException, TotalPartyKillException {
         var player1 = Player.from("player1");
         var player2 = Player.from("player2");
         var temple = new Temple(
@@ -68,7 +69,7 @@ class TempleTest {
     }
 
     @Test
-    public void advanceToNextRoom_OpensNextRoom() throws NoMoreRoomsException{
+    public void advanceToNextRoom_OpensNextRoom() throws NoMoreRoomsException, TotalPartyKillException{
         var player1 = Player.from("player1");
         var temple = new Temple(List.of(new GemRoom(2)), List.of(player1));
         temple.advanceToNextRoom();
@@ -76,7 +77,7 @@ class TempleTest {
     }
 
     @Test
-    public void retreatPlayersFromTemple_RemovesPlayersFromPlayersInTemple() throws NoMoreRoomsException {
+    public void retreatPlayersFromTemple_RemovesPlayersFromPlayersInTemple() throws NoMoreRoomsException, TotalPartyKillException {
         var player1 = Player.from("player1");
         var player2 = Player.from("player2");
         var player3 = Player.from("player3");
@@ -93,7 +94,7 @@ class TempleTest {
     }
 
     @Test
-    public void retreatPlayersFromTemple_MovesValuablesFromTempleToStorage() throws NoMoreRoomsException {
+    public void retreatPlayersFromTemple_MovesValuablesFromTempleToStorage() throws NoMoreRoomsException, TotalPartyKillException {
         var player1 = Player.from("player1");
         var player2 = Player.from("player2");
         var temple = new Temple(List.of(new GemRoom(4), new GemRoom(2)), List.of(player1, player2));
@@ -107,7 +108,7 @@ class TempleTest {
     }
 
     @Test
-    public void retreatPlayersFromTemple_PicksUpGroundValuablesBeforeStorage() throws NoMoreRoomsException {
+    public void retreatPlayersFromTemple_PicksUpGroundValuablesBeforeStorage() throws NoMoreRoomsException, TotalPartyKillException {
         var player1 = Player.from("player1");
         var player2 = Player.from("player2");
         var temple = new Temple(List.of(new GemRoom(1)), List.of(player1, player2));

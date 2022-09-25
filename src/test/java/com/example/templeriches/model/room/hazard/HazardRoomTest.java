@@ -1,5 +1,6 @@
 package com.example.templeriches.model.room.hazard;
 
+import com.example.templeriches.model.exception.TotalPartyKillException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -22,7 +23,7 @@ class HazardRoomTest {
     }
 
     @Test
-    public void openRoom_IncreasesHazardCount() {
+    public void openRoom_IncreasesHazardCount() throws TotalPartyKillException {
         var tracker = new HazardTracker();
         var room = new HazardRoom(tracker, SNAKE);
 
