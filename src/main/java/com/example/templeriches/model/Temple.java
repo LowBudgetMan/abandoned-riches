@@ -3,11 +3,15 @@ package com.example.templeriches.model;
 import com.example.templeriches.model.exception.NoMoreRoomsException;
 import com.example.templeriches.model.exception.TotalPartyKillException;
 import com.example.templeriches.model.room.Room;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@EqualsAndHashCode
+@ToString
 public class Temple {
     private final List<Room> rooms;
     private final ArrayList<Player> playersInTemple;
