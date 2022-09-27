@@ -1,4 +1,4 @@
-package com.example.templeriches.model;
+package com.example.templeriches.model.temple;
 
 public class TempleOptions {
     int fireHazardCount;

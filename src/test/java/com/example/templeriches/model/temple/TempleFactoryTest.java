@@ -1,5 +1,6 @@
-package com.example.templeriches.model;
+package com.example.templeriches.model.temple;
 
+import com.example.templeriches.model.Player;
 import com.example.templeriches.model.room.Room;
 import com.example.templeriches.model.room.hazard.HazardRoom;
 import com.example.templeriches.model.room.hazard.HazardTracker;

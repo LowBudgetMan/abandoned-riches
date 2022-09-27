@@ -1,9 +1,9 @@
-package com.example.templeriches.model;
+package com.example.templeriches.model.temple;
 
+import com.example.templeriches.model.Player;
 import com.example.templeriches.model.exception.NoMoreRoomsException;
 import com.example.templeriches.model.exception.TotalPartyKillException;
 import com.example.templeriches.model.room.Room;
-import com.example.templeriches.model.room.RoomType;
 import com.example.templeriches.model.room.valuable.TrinketRoom;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

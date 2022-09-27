@@ -1,5 +1,6 @@
-package com.example.templeriches.model;
+package com.example.templeriches.model.temple;
 
+import com.example.templeriches.model.Player;
 import com.example.templeriches.model.room.Room;
 import com.example.templeriches.model.room.hazard.HazardRoom;
 import com.example.templeriches.model.room.hazard.HazardTracker;
@@ -8,7 +9,6 @@ import com.example.templeriches.model.room.valuable.GemRoom;
 import com.example.templeriches.model.room.valuable.TrinketRoom;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TempleFactory {
