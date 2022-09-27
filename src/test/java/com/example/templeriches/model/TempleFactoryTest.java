@@ -5,6 +5,7 @@ import com.example.templeriches.model.room.hazard.HazardRoom;
 import com.example.templeriches.model.room.hazard.HazardTracker;
 import com.example.templeriches.model.room.hazard.HazardType;
 import com.example.templeriches.model.room.valuable.GemRoom;
+import com.example.templeriches.model.room.valuable.TrinketRoom;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ class TempleFactoryTest {
     @Test
     public void create_ReturnsTempleWithCorrectNumberOfGemRooms() {
         var expectedTemple = new Temple(gemRoomList, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 0), List.of());
+        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -43,7 +44,7 @@ class TempleFactoryTest {
     public void create_WithPlayers_ReturnsTempleWithPlayers() {
         var players = List.of(Player.from("Player 1"), Player.from("Player 2"));
         var expectedTemple = new Temple(gemRoomList, players);
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 0), players);
+        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 0, 0), players);
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -60,7 +61,7 @@ class TempleFactoryTest {
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(5, 0, 0, 0, 0), List.of());
+        Temple temple = TempleFactory.create(new TempleOptions(5, 0, 0, 0, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -74,7 +75,7 @@ class TempleFactoryTest {
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 2, 0, 0, 0), List.of());
+        Temple temple = TempleFactory.create(new TempleOptions(0, 2, 0, 0, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -89,7 +90,7 @@ class TempleFactoryTest {
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 3, 0, 0), List.of());
+        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 3, 0, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -105,7 +106,7 @@ class TempleFactoryTest {
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 4, 0), List.of());
+        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 4, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -124,7 +125,17 @@ class TempleFactoryTest {
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 7), List.of());
+        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 7, 0), List.of());
+        assertThat(temple).isEqualTo(expectedTemple);
+    }
+
+    @Test
+    public void create_withTrinketOptions_ReturnsTempleWithSameNumberOfTrinketRooms() {
+        var trinketRooms = List.of(new TrinketRoom(), new TrinketRoom());
+        var expectedRooms = new ArrayList<>(gemRoomList);
+        expectedRooms.addAll(trinketRooms);
+        var expectedTemple = new Temple(expectedRooms, List.of());
+        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 0, 2), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 }

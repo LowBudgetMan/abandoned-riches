@@ -5,6 +5,7 @@ import com.example.templeriches.model.room.hazard.HazardRoom;
 import com.example.templeriches.model.room.hazard.HazardTracker;
 import com.example.templeriches.model.room.hazard.HazardType;
 import com.example.templeriches.model.room.valuable.GemRoom;
+import com.example.templeriches.model.room.valuable.TrinketRoom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +38,19 @@ public class TempleFactory {
         addHazardRooms(hazardTracker, HazardType.SNAKE, options.snakesHazardCount, roomsList);
         addHazardRooms(hazardTracker, HazardType.SPIDER, options.spiderHazardCount, roomsList);
         addHazardRooms(hazardTracker, HazardType.ZOMBIE, options.zombieHazardCount, roomsList);
+        addTrinketRooms(options.trinketCount, roomsList);
         return new Temple(roomsList, players);
     }
 
     private static void addHazardRooms(HazardTracker hazardTracker, HazardType hazardType, int hazardCount, List<Room> roomsList) {
         for (int count = 0; count < hazardCount; count++) {
             roomsList.add(new HazardRoom(hazardTracker, hazardType));
+        }
+    }
+
+    private static void addTrinketRooms(int trinketCount, List<Room> roomsList) {
+        for (int count = 0; count < trinketCount; count++) {
+            roomsList.add(new TrinketRoom());
         }
     }
 }
