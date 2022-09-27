@@ -2,9 +2,11 @@ package com.example.templeriches.model;
 
 import com.example.templeriches.model.exception.NoMoreRoomsException;
 import com.example.templeriches.model.exception.TotalPartyKillException;
+import com.example.templeriches.model.room.Room;
 import com.example.templeriches.model.room.hazard.HazardRoom;
 import com.example.templeriches.model.room.hazard.HazardTracker;
 import com.example.templeriches.model.room.valuable.GemRoom;
+import com.example.templeriches.model.room.valuable.TrinketRoom;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -117,5 +119,26 @@ class TempleTest {
         temple.retreatPlayersFromTemple(List.of(player1));
 
         assertThat(player1.getValueOfStorage()).isEqualTo(1);
+    }
+
+    @Test
+    public void getNumberOfTrinketsLeft_ReturnsNumberOfTrinketsAfterCurrentRoom() throws NoMoreRoomsException, TotalPartyKillException {
+        var player1 = Player.from("player1");
+        var player2 = Player.from("player2");
+        List<Room> rooms = List.of(new GemRoom(1), new TrinketRoom(), new TrinketRoom());
+        var temple = new Temple(rooms, List.of(player1, player2));
+        temple.advanceToNextRoom();
+        assertThat(temple.getNumberOfTrinketsLeft()).isEqualTo(2);
+    }
+
+    @Test
+    public void getNumberOfTrinketsLeft_ReturnsNumberOfTrinketsNotPickedUpFromGround() throws NoMoreRoomsException, TotalPartyKillException {
+        var player1 = Player.from("player1");
+        var player2 = Player.from("player2");
+        List<Room> rooms = List.of(new TrinketRoom());
+        var temple = new Temple(rooms, List.of(player1, player2));
+        temple.advanceToNextRoom();
+        temple.retreatPlayersFromTemple(List.of(player1, player2));
+        assertThat(temple.getNumberOfTrinketsLeft()).isEqualTo(1);
     }
 }

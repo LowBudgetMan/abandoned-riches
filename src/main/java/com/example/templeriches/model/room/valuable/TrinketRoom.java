@@ -13,6 +13,10 @@ import java.util.Optional;
 public class TrinketRoom implements ValuableRoom {
     private boolean roomHasTrinket = true;
 
+    public boolean hasTrinket() {
+        return roomHasTrinket;
+    }
+
     @Override
     public int getRoomValue() {
         return roomHasTrinket ? Trinket.getTrinketValue() : 0;
@@ -30,7 +34,7 @@ public class TrinketRoom implements ValuableRoom {
 
     @Override
     public RoomType getRoomType() {
-        return RoomType.VALUABLE;
+        return RoomType.TRINKET;
     }
 
     @Override

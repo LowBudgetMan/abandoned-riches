@@ -17,9 +17,9 @@ class TrinketRoomTest {
     }
 
     @Test
-    public void getRoomType_ReturnsValuable() {
+    public void getRoomType_ReturnsTrinket() {
         var room = new TrinketRoom();
-        assertThat(room.getRoomType()).isEqualTo(RoomType.VALUABLE);
+        assertThat(room.getRoomType()).isEqualTo(RoomType.TRINKET);
     }
 
     @Test
@@ -72,5 +72,18 @@ class TrinketRoomTest {
         assertThat(player1.getValueOfTempleHaul()).isEqualTo(0);
         assertThat(player2.getValueOfTempleHaul()).isEqualTo(0);
         assertThat(room.getRoomValue()).isEqualTo(Trinket.getTrinketValue());
+    }
+
+    @Test
+    public void roomHasTrinket_WithTrinketNotGettingPickedUp_returnsTrue() {
+        var room = new TrinketRoom();
+        assertThat(room.hasTrinket()).isTrue();
+    }
+
+    @Test
+    public void roomHasTrinket_WithTrinketGettingPickedUp_returnsFalse() {
+        var room = new TrinketRoom();
+        room.exitRoom(List.of(Player.from("Player 1")));
+        assertThat(room.hasTrinket()).isFalse();
     }
 }

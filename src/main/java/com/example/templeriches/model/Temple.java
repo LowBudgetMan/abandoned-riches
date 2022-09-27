@@ -3,6 +3,8 @@ package com.example.templeriches.model;
 import com.example.templeriches.model.exception.NoMoreRoomsException;
 import com.example.templeriches.model.exception.TotalPartyKillException;
 import com.example.templeriches.model.room.Room;
+import com.example.templeriches.model.room.RoomType;
+import com.example.templeriches.model.room.valuable.TrinketRoom;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -51,7 +53,13 @@ public class Temple {
         }
     }
 
-    //TODO: Add method to show already revealed rooms
+    public long getNumberOfTrinketsLeft() {
+        return rooms.stream()
+                .filter(room -> room instanceof TrinketRoom)
+                .map(room -> (TrinketRoom) room)
+                .filter(TrinketRoom::hasTrinket)
+                .count();
+    }
 
-    //TODO: Add method to see how many Trinkets are left over
+    //TODO: Add method to show already revealed rooms
 }
