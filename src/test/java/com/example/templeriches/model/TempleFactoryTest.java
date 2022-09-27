@@ -12,9 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 class TempleFactoryTest {
     //Gem Rooms: 17, 15, 14, 13, 11, 11, 9, 7, 7, 5, 5, 4, 3, 2, 1
+    private final RoomShuffler mockRoomShuffler = mock(RoomShuffler.class);
+    private final TempleFactory templeFactory = new TempleFactory(mockRoomShuffler);
     private final List<Room> gemRoomList = List.of(
             new GemRoom(17),
             new GemRoom(15),
@@ -36,7 +39,8 @@ class TempleFactoryTest {
     @Test
     public void create_ReturnsTempleWithCorrectNumberOfGemRooms() {
         var expectedTemple = new Temple(gemRoomList, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 0, 0), List.of());
+        when(mockRoomShuffler.shuffle(gemRoomList)).thenReturn(gemRoomList);
+        Temple temple = templeFactory.create(new TempleOptions(0, 0, 0, 0, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -44,7 +48,8 @@ class TempleFactoryTest {
     public void create_WithPlayers_ReturnsTempleWithPlayers() {
         var players = List.of(Player.from("Player 1"), Player.from("Player 2"));
         var expectedTemple = new Temple(gemRoomList, players);
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 0, 0), players);
+        when(mockRoomShuffler.shuffle(gemRoomList)).thenReturn(gemRoomList);
+        Temple temple = templeFactory.create(new TempleOptions(0, 0, 0, 0, 0, 0), players);
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -60,8 +65,9 @@ class TempleFactoryTest {
         );
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
+        when(mockRoomShuffler.shuffle(expectedRooms)).thenReturn(expectedRooms);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(5, 0, 0, 0, 0, 0), List.of());
+        Temple temple = templeFactory.create(new TempleOptions(5, 0, 0, 0, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -74,8 +80,9 @@ class TempleFactoryTest {
         );
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
+        when(mockRoomShuffler.shuffle(expectedRooms)).thenReturn(expectedRooms);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 2, 0, 0, 0, 0), List.of());
+        Temple temple = templeFactory.create(new TempleOptions(0, 2, 0, 0, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -89,8 +96,9 @@ class TempleFactoryTest {
         );
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
+        when(mockRoomShuffler.shuffle(expectedRooms)).thenReturn(expectedRooms);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 3, 0, 0, 0), List.of());
+        Temple temple = templeFactory.create(new TempleOptions(0, 0, 3, 0, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -105,8 +113,9 @@ class TempleFactoryTest {
         );
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
+        when(mockRoomShuffler.shuffle(expectedRooms)).thenReturn(expectedRooms);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 4, 0, 0), List.of());
+        Temple temple = templeFactory.create(new TempleOptions(0, 0, 0, 4, 0, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -124,8 +133,9 @@ class TempleFactoryTest {
         );
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(fireHazards);
+        when(mockRoomShuffler.shuffle(expectedRooms)).thenReturn(expectedRooms);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 7, 0), List.of());
+        Temple temple = templeFactory.create(new TempleOptions(0, 0, 0, 0, 7, 0), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
     }
 
@@ -134,8 +144,15 @@ class TempleFactoryTest {
         var trinketRooms = List.of(new TrinketRoom(), new TrinketRoom());
         var expectedRooms = new ArrayList<>(gemRoomList);
         expectedRooms.addAll(trinketRooms);
+        when(mockRoomShuffler.shuffle(expectedRooms)).thenReturn(expectedRooms);
         var expectedTemple = new Temple(expectedRooms, List.of());
-        Temple temple = TempleFactory.create(new TempleOptions(0, 0, 0, 0, 0, 2), List.of());
+        Temple temple = templeFactory.create(new TempleOptions(0, 0, 0, 0, 0, 2), List.of());
         assertThat(temple).isEqualTo(expectedTemple);
+    }
+
+    @Test
+    public void create_shufflesTheRoomsList() {
+        Temple temple = templeFactory.create(new TempleOptions(0, 0, 0, 0, 0, 0), List.of());
+        verify(mockRoomShuffler).shuffle(gemRoomList);
     }
 }

@@ -8,10 +8,12 @@ import com.example.templeriches.model.room.valuable.GemRoom;
 import com.example.templeriches.model.room.valuable.TrinketRoom;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TempleFactory {
 
+    private final RoomShuffler roomShuffler;
     private static final List<Room> gemRoomList = List.of(
             new GemRoom(17),
             new GemRoom(15),
@@ -30,25 +32,30 @@ public class TempleFactory {
             new GemRoom(1)
     );
 
-    public static Temple create(TempleOptions options, List<Player> players) {
+    public TempleFactory(RoomShuffler roomShuffler) {
+        this.roomShuffler = roomShuffler;
+    }
+
+    public Temple create(TempleOptions options, List<Player> players) {
         var hazardTracker = new HazardTracker();
-        var roomsList = new ArrayList<>(gemRoomList);
+        List<Room> roomsList = new ArrayList<>(gemRoomList);
         addHazardRooms(hazardTracker, HazardType.FIRE, options.fireHazardCount, roomsList);
         addHazardRooms(hazardTracker, HazardType.ROCKS, options.rocksHazardCount, roomsList);
         addHazardRooms(hazardTracker, HazardType.SNAKE, options.snakesHazardCount, roomsList);
         addHazardRooms(hazardTracker, HazardType.SPIDER, options.spiderHazardCount, roomsList);
         addHazardRooms(hazardTracker, HazardType.ZOMBIE, options.zombieHazardCount, roomsList);
         addTrinketRooms(options.trinketCount, roomsList);
+        roomsList = roomShuffler.shuffle(roomsList);
         return new Temple(roomsList, players);
     }
 
-    private static void addHazardRooms(HazardTracker hazardTracker, HazardType hazardType, int hazardCount, List<Room> roomsList) {
+    private void addHazardRooms(HazardTracker hazardTracker, HazardType hazardType, int hazardCount, List<Room> roomsList) {
         for (int count = 0; count < hazardCount; count++) {
             roomsList.add(new HazardRoom(hazardTracker, hazardType));
         }
     }
 
-    private static void addTrinketRooms(int trinketCount, List<Room> roomsList) {
+    private void addTrinketRooms(int trinketCount, List<Room> roomsList) {
         for (int count = 0; count < trinketCount; count++) {
             roomsList.add(new TrinketRoom());
         }
